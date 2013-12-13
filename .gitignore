@@ -1,0 +1,4 @@
+# Folders for the JacoCoverage Plugin
+/coverage/
+/.jacocoverage/
+/nbproject/coverage.properties
