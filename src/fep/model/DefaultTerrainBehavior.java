@@ -4,45 +4,35 @@
 package fep.model;
 
 /**
- *
+ * Enumerates the built-in TerrainBehavior instances used and provided by FEP.
+ * These are based on and synthesized from the information found at
+ * <a href="http://serenesforest.net/fe7/terrain.html">Serenes Forest</a>
  * @author Kyle
  */
 public enum DefaultTerrainBehavior implements TerrainBehavior {
 
-    /*
-     * Desert
-     * Fence
-     * Flat
-     * Forest
-     * Fort
-     * House
-     * Lake
-     * Mountain
-     * Peak
-     * River
-     * Ruins
-     * Sand
-     * Sea
-     * Throne
-     * Wall
-     */
-    
-    DESERT_BEHAVIOR(5, 0, 0),
-    FENCE_BEHAVIOR(0, 0, 0),
+    // Traditional "Open" Terrain
     FLAT_BEHAVIOR(0, 0, 0),
+    SAND_BEHAVIOR(5, 0, 0),
+    // Traditional "Rough" Terrain
     FOREST_BEHAVIOR(20, 1, 0),
-    FORT_BEHAVIOR(20, 2, 0),
-    HOUSE_BEHAVIOR(10, 0, 0),
-    LAKE_BEHAVIOR(10, 0, 0),
+    PILLAR_BEHAVIOR(20, 1, 0),
+    DESERT_BEHAVIOR(5, 0, 0),
+    // Mountainous Terrain
     MOUNTAIN_BEHAVIOR(30, 1, 0),
     PEAK_BEHAVIOR(40, 1, 0),
-    PILLAR_BEHAVIOR(20, 1, 0),
+    // Watery Terrain
     RIVER_BEHAVIOR(0, 0, 0),
-    RUINS_BEHAVIOR(0, 0, 0),
-    SAND_BEHAVIOR(5, 0, 0),
+    LAKE_BEHAVIOR(10, 0, 0),
     SEA_BEHAVIOR(10, 0, 0),
+    // City Terrain
+    RUINS_BEHAVIOR(0, 0, 0),
+    HOUSE_BEHAVIOR(10, 0, 0),
+    FORT_BEHAVIOR(20, 2, 0),
     THRONE_BEHAVIOR(20, 2, 0),
-    WALL_BEHAVIOR(0, 0, 0);
+    // Traditionally Impassable Terrain
+    FENCE_BEHAVIOR(0, 0, 0), // can be flown over
+    WALL_BEHAVIOR(0, 0, 0);  // cannot be flown over
 
     private final int bonusAvoid;
     private final int bonusDefense;
