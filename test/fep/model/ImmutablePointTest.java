@@ -103,6 +103,67 @@ public class ImmutablePointTest {
     }
 
     /**
+     * Test of inBounds method, of class ImmutablePoint.
+     */
+    @Test
+    public void testInBounds() {
+        final int min = 0;
+        final int max = 10;
+        
+        // Testing of InBounds points
+        ImmutablePoint origin = new ImmutablePoint(min, min);
+        ImmutablePoint upperX = new ImmutablePoint(max - 1, min);
+        ImmutablePoint upperY = new ImmutablePoint(min, max - 1);
+        ImmutablePoint upperBound = new ImmutablePoint(max - 1, max - 1);
+        
+        assertTrue(origin.inBounds(min, min, max, max));
+        assertTrue(upperX.inBounds(min, min, max, max));
+        assertTrue(upperY.inBounds(min, min, max, max));
+        assertTrue(upperBound.inBounds(min, min, max, max));
+        
+        // Testing of OutOfBounds points
+        ImmutablePoint belowBounds = new ImmutablePoint(min - 1, min - 1);
+        ImmutablePoint belowX = new ImmutablePoint(min - 1, min);
+        ImmutablePoint belowY = new ImmutablePoint(min, min - 1);
+        ImmutablePoint aboveBounds = new ImmutablePoint(max, max);
+        ImmutablePoint aboveX = new ImmutablePoint(max, max - 1);
+        ImmutablePoint aboveY = new ImmutablePoint(max -1, max);
+        
+        assertFalse(belowBounds.inBounds(min, min, max, max));
+        assertFalse(belowX.inBounds(min, min, max, max));
+        assertFalse(belowY.inBounds(min, min, max, max));
+        assertFalse(aboveBounds.inBounds(min, min, max, max));
+        assertFalse(aboveX.inBounds(min, min, max, max));
+        assertFalse(aboveY.inBounds(min, min, max, max));
+        
+        // Testing of illegal bounds
+        try {
+            // first ensure that negative bounds work
+            origin.inBounds(-1, -1, 1, 1);
+        } catch(IllegalArgumentException ex) {
+            fail("Failed checking with negative bounds.");
+        }
+        try {
+            // check with inverted x bounds
+            origin.inBounds(1, -1, -1, 1);
+            fail("Successfully checked boundedness with illegal x bounds.");
+        } catch(IllegalArgumentException ex) {
+        }
+        try {
+            // check with inverted y bounds
+            origin.inBounds(-1, 1, 1, -1);
+            fail("Successfully checked boundedness with illegal y bounds.");
+        } catch(IllegalArgumentException ex) {
+        }
+        try {
+            // check with inverted x and y bounds
+            origin.inBounds(1, 1, -1, -1);
+            fail("Successfully checked boundedness with illegal bounds.");
+        } catch(IllegalArgumentException ex) {
+        }
+    }
+    
+    /**
      * Test of getTranslated method, of class ImmutablePoint.
      */
     @Test

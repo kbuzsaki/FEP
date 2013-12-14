@@ -4,6 +4,7 @@
 package fep.model;
 
 import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.geom.Point2D;
 import java.util.HashSet;
 import java.util.Set;
@@ -113,6 +114,27 @@ public final class ImmutablePoint {
      */
     public boolean isAdjacentTo(ImmutablePoint point) {
         return this.distance(point) == 1;
+    }
+    
+    /**
+     * Returns true if and only if this point is contained within the bounds
+     * specified by the given coordinates and dimensions.
+     * @param xMin  the lowest acceptable x coordinate, inclusive
+     * @param yMin  the lowest acceptable y coordinate, inclusive
+     * @param xMax  the x coordinate upper limit, exclusive. Must not be less than xMin.
+     * @param yMax  the y coordinate upper limit, exclusive. Must not be less than yMin.
+     * @return  true if this point is within the specified bounds
+     */
+    public boolean inBounds(int xMin, int yMin, int xMax, int yMax) {
+        if(xMax < xMin || yMax < yMin) {
+            throw new IllegalArgumentException("Upper bound must not be less than lower bound."
+                    + " Lower: " + new ImmutablePoint(xMin, yMin)
+                    + ", Upper: " + new ImmutablePoint(xMax, yMax));
+        }
+        return getX() >= xMin
+            && getX() <  xMax
+            && getY() >= yMin
+            && getY() <  yMax;
     }
     
     /**
