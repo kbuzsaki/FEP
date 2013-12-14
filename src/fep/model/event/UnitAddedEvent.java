@@ -5,7 +5,6 @@ package fep.model.event;
 
 import fep.model.Map;
 import fep.model.Unit;
-import java.awt.event.ActionEvent;
 import java.util.EventObject;
 
 /**

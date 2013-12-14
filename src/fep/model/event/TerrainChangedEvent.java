@@ -6,7 +6,6 @@ package fep.model.event;
 import fep.model.ImmutablePoint;
 import fep.model.Map;
 import fep.model.Terrain;
-import fep.model.Unit;
 import java.util.EventObject;
 
 /**

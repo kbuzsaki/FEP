@@ -9,9 +9,6 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
-
-
-
 public class Main {
     static Command[] commands = { A, UP, UP, LEFT, LEFT, DOWN, LEFT, A};
 

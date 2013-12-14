@@ -4,11 +4,11 @@
 package fep.controller;
 
 import fep.model.DefaultTerrain;
-import fep.model.Path;
 import fep.model.Direction;
-import fep.model.MoveCostStrategy;
 import fep.model.ImmutablePoint;
+import fep.model.MoveCostStrategy;
 import fep.model.MoveType;
+import fep.model.Path;
 import fep.model.TerrainBehavior;
 import java.util.ArrayList;
 import java.util.Arrays;
