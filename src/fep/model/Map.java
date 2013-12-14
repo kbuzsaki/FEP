@@ -8,23 +8,43 @@ import fep.model.event.TerrainChangedEvent;
 import fep.model.event.UnitAddedEvent;
 import fep.model.event.UnitMovedEvent;
 import fep.model.event.UnitRemovedEvent;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 import javax.swing.event.EventListenerList;
 
 /**
  * Represents a game map.
- * A game map is a 2-dimensional grid of fixed height and width. Each square in
- * the grid
+ * A game map is a 2-dimensional grid of fixed height and width. Every square
+ * contained within the map is guaranteed to have a non-null piece of terrain.
+ * Squares may or may not contain units. Units are guaranteed to only appear
+ * once in the map.
  * @author Kyle
  */
 public class Map {
     
+    /**
+     * The width of the map in tiles.
+     */
     private final int width;
+    /**
+     * The height of the map in tiles.
+     */
     private final int height;
+    /**
+     * Positionally organized array of the units on this map.
+     * The dimensions of this 2D array should match width and height, respectively.
+     */
     private final Unit[][] unitIndex;
+    /**
+     * Positionally organized array of the terrain making up this map.
+     * The dimensions of this 2D array should match width and height, respectively.
+     */
     private final Terrain[][] terrainIndex;
+    /**
+     * EventListenerList of all of this map's EventListeners. 
+     * Contains {@link fep.model.event.MapChangeListener} objects that this map
+     * will notify when changes are made to its terrain or units.
+     */
     private final EventListenerList listeners;
     
     public Map(final int width, final int height) {
@@ -61,7 +81,8 @@ public class Map {
     public final int getHeight() {
         return height;
     }
-    
+
+    // Positional Accessors
     /**
      * Returns whether or not a unit is present at the given position.
      * @param position the position to check for units. Must be non-null and
@@ -122,6 +143,7 @@ public class Map {
         return new Tile(this, position);
     }
     
+    // Specific Unit Accessors
     /**
      * Returns whether or not the given unit is present in the map.
      * In the case of a null unit, always returns false.
@@ -158,6 +180,7 @@ public class Map {
         throw new UnitNotFoundException(unit, "Attempting to get the position of a unit not in the map.");
     }
     
+    // Unit and Terrain Mutators
     /**
      * Adds the given unit to the map at the given position. There must not be
      * a unit already occupying the given position.
@@ -253,6 +276,7 @@ public class Map {
         }
     }
     
+    // Listener Accessors and Mutators
     /**
      * Registers the given listener to receive events when the map is altered.
      * @param listener the listener to register.
@@ -267,6 +291,10 @@ public class Map {
     public void removeMapChangeListener(MapChangeListener listener) {
         listeners.remove(MapChangeListener.class, listener);
     }
+    /**
+     * Returns an array of this Map's MapChangeListeners. 
+     * @return  this map's MapChangeListeners.
+     */
     private MapChangeListener[] getMapChangeListeners() {
         return listeners.getListeners(MapChangeListener.class);
     }

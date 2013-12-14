@@ -131,7 +131,8 @@ public final class ImmutablePoint {
      * specified direction. For the purposes of this function, UP is positive, 
      * DOWN is negative, LEFT is negative, and RIGHT is positive.
      * @param direction  the direction to be offset in.
-     * @return a point 1 unit offset from this point in the specified direction.
+     * @param magnitude  the number of units to offset the resulting point 
+     * @return a point magnitude units offset from this point in the specified direction.
      */
     public ImmutablePoint getTranslated(Direction direction, int magnitude) {
         switch(direction) {

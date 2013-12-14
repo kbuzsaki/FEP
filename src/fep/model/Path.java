@@ -12,12 +12,19 @@ import java.util.NoSuchElementException;
 
 /**
  * A series of adjacent points representing the path of a game element.
+ * Each point in the path is guaranteed to be adjacent to the points preceding
+ * and following it in the path, as specified by ImmutablePoint.isAdjacentTo().
  * This class is immutable.
  * @author Kyle
  */
 public final class Path implements Iterable<ImmutablePoint> { 
     private static final Path EMPTY_PATH = new Path(Collections.<ImmutablePoint>emptyList());
     
+    /**
+     * An ImmutableList of the ImmutablePoint objects making up this path.
+     * Each point in the list is guaranteed to be adjacent to the points preceding
+     * and following it in the list, as specified by ImmutablePoint.isAdjacentTo().
+     */
     private final List<ImmutablePoint> points;
     
     /**
@@ -38,7 +45,7 @@ public final class Path implements Iterable<ImmutablePoint> {
      */
     public static Path emptyPath() {
         return EMPTY_PATH;
-    }
+    }    
     
     /**
      * Creates a path with the given points as its starting values. The points 
@@ -57,7 +64,6 @@ public final class Path implements Iterable<ImmutablePoint> {
         }
         return createPath(Arrays.asList(unsanitizedPointsArray));
     }
-    
     /**
      * Creates a path with the given points as its starting values. The points 
      * must form a valid path. This means that the list of points may not 
@@ -70,15 +76,16 @@ public final class Path implements Iterable<ImmutablePoint> {
         if(unsanitizedPoints == null)  {
             throw new IllegalArgumentException("Unsanitized points may not be null.");
         }
-        // copy before validation for thread safety
+        // shallow copy to prevent outside modification
         List<ImmutablePoint> unvalidatedPoints = new ArrayList<>(unsanitizedPoints);
         if(!isValidPath(unvalidatedPoints)) {
             throw new IllegalArgumentException("Invalid path supplied. "
                     + "Points must be sequential and non-null.");
         }
-        return createPathInternal(unvalidatedPoints);
+        else {
+            return createPathInternal(unvalidatedPoints);
+        }
     }
-    
     /**
      * Creates a path with the specified points. Assumes that the list of points
      * is valid and has already been defensively copied.
@@ -89,41 +96,7 @@ public final class Path implements Iterable<ImmutablePoint> {
         return new Path(Collections.unmodifiableList(validPoints));
     }
     
-    /**
-     * Returns a path with this path's data and the supplied point appended.
-     * The point must either be adjacent to the tip of the path or in the path 
-     * already. If the point is adjacent, it will be appended. If the supplied
-     * point is already in the path, the returned path will truncate at that
-     * point instead.
-     * @param point  the point to with to the path. Must be either adjacent to 
-     * the tip of the path or in the path. May not be null.
-     */
-    public Path concat(ImmutablePoint point) {
-        if(point == null) {
-            throw new IllegalArgumentException("Added point must be non-null.");
-        }
-        // if the point is already in the path, simplify the path by removing all points following it
-        if(contains(point)) {
-            // logging code in case of weird behavior. 
-            // Technically legal, but probably shouldn't happen.
-            if(getEnd().equals(point)) {
-                System.out.println("Warning: adding point equal to tip.");
-            }
-            // index + 1 because sublist's range is [begin, end)
-            return createPathInternal(points.subList(0, points.indexOf(point) + 1)); 
-        }
-        // the point can be added if it only if it is adjacent to the tip
-        // if there is no tip, it can be added anyways
-        else if(isEmpty() || point.isAdjacentTo(getEnd())) {
-            return createPathInternal(catList(points, point)); 
-        }
-        else {
-            throw new IllegalArgumentException("Added points must be in the"
-                    + " path or adjacent to its end. (end: " + getEnd() 
-                    + " point: " + point + ")");
-        }
-    }
-    
+    // Positional Accessors
     /**
      * Returns the point at the specified index in the path. 
      * @param index  the index of the point to be returned. Must be greater than
@@ -140,7 +113,6 @@ public final class Path implements Iterable<ImmutablePoint> {
             return points.get(index);
         }
     } 
-    
     /**
      * Returns final point in the path. The end of the path is the point that 
      * was most recently added. 
@@ -153,18 +125,7 @@ public final class Path implements Iterable<ImmutablePoint> {
         return get(points.size() - 1);
     }
     
-    /**
-     * Returns <tt>true</tt> if the path contains the specified point.
-     * More formally, returns <tt>true</tt> if and only if this path contains
-     * at least one Point <tt>p2</tt> such that
-     * <tt>(p1==null&nbsp;?&nbsp;p2==null&nbsp;:&nbsp;p1.equals(p2))</tt>.
-     * @param p1  the point whose presence in the path is to be tested.
-     * @return  <tt>true</tt> if this path contains the specified point.
-     */
-    public boolean contains(ImmutablePoint p1) {
-        return points.contains(p1);
-    }
-    
+    // Metadata Accessors
     /**
      * Returns the number of points in the path.
      * @return the number of points in the path.
@@ -172,7 +133,6 @@ public final class Path implements Iterable<ImmutablePoint> {
     public int size() {
         return points.size();
     }
-    
     /**
      * Returns <tt>true</tt> if the path contains no points. This is logically
      * equivalent to <code>size() == 0</code>
@@ -182,6 +142,56 @@ public final class Path implements Iterable<ImmutablePoint> {
         return size() == 0;
     }
     
+    // Point-Specific Accessors and Mutators
+    /**
+     * Returns <tt>true</tt> if the path contains the specified point.
+     * More formally, returns <tt>true</tt> if and only if this path contains
+     * at least one Point <tt>p2</tt> such that
+     * <tt>(p1==null&nbsp;?&nbsp;p2==null&nbsp;:&nbsp;p1.equals(p2))</tt>.
+     * @param point  the point whose presence in the path is to be tested.
+     * @return  <tt>true</tt> if this path contains the specified point.
+     */
+    public boolean contains(ImmutablePoint point) {
+        return points.contains(point);
+    }
+    /**
+     * Returns a path with this path's data and the supplied point appended.
+     * The point must either be adjacent to the tip of the path or in the path 
+     * already. If the point is adjacent, it will be appended. If the supplied
+     * point is already in the path, the returned path will truncate at that
+     * point instead.
+     * @param point  the point to with to the path. Must be either adjacent to 
+     * the tip of the path or in the path. Must be non-null.
+     * @return  a new path instance representing the result of the concatenation.
+     */
+    public Path concat(ImmutablePoint point) {
+        if(point == null) {
+            throw new IllegalArgumentException("Added point must be non-null.");
+        }
+        // if the point is already in the path, simplify the path by removing all points following it
+        if(contains(point)) {
+            // logging code in case of weird behavior. 
+            // Technically legal, but probably shouldn't happen.
+            if(getEnd().equals(point)) {
+                System.err.println("Warning: concating with point equal to end "
+                        + "of path. (path: " + this + ")");
+            }
+            // index + 1 because sublist's range is [begin, end)
+            return createPathInternal(points.subList(0, points.indexOf(point) + 1)); 
+        }
+        // the point can be added if it only if it is adjacent to the tip
+        // if there is no tip, it can be added anyways
+        else if(isEmpty() || point.isAdjacentTo(getEnd())) {
+            return createPathInternal(catList(points, point)); 
+        }
+        else {
+            throw new IllegalArgumentException("Added points must be in the"
+                    + " path or adjacent to its end. (end: " + getEnd() 
+                    + " point: " + point + ")");
+        }
+    }
+    
+    // Path specific overrides for built-in methods
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -195,34 +205,34 @@ public final class Path implements Iterable<ImmutablePoint> {
         
         return sb.toString();
     }
-
     @Override
     public boolean equals(Object obj) {
         if(obj instanceof Path) {
             Path path = (Path) obj;
-            if(size() != path.size()) {
-                return false;
-            }
-            
-            for(int i = 0; i < size(); i++) {
-                if(get(i) != path.get(i)) {
-                    return false;
-                }
-            }
-            
-            return true;
+            return points.equals(path.points);
         }
         else {
             return super.equals(obj); 
         }
     }
-
     @Override
     public int hashCode() {
         int hashCode = 1;
-        for (ImmutablePoint point : this)
+        for (ImmutablePoint point : this) {
             hashCode = 17*hashCode + point.hashCode();
+        }
         return hashCode;
+    }
+    
+    // Convenience methods for iteration.
+    /**
+     * Provides an ordered list of the points in the path. The points are 
+     * ordered with the most recent points at the end of the list. The list
+     * returned is a copy of the internal list.
+     * @return and ordered list of the points in the path.
+     */
+    public List<ImmutablePoint> toList() {
+        return new ArrayList<>(points);
     }
     
     /**
@@ -236,37 +246,9 @@ public final class Path implements Iterable<ImmutablePoint> {
     }
     
     /**
-     * Provides an ordered list of the points in the path. The points are 
-     * ordered with the most recent points at the end of the list. The list
-     * returned is a copy of the internal list.
-     * @return and ordered list of the points in the path.
-     */
-    public List<ImmutablePoint> toList() {
-        return new ArrayList<>(points);
-    }
-    
-    private static boolean isValidPath(List<ImmutablePoint> points) {
-        // first ensure no null points
-        for(ImmutablePoint p : points) {
-            if(p == null) {
-                return false;
-            }
-        }
-        // then ensure all points are adjacent
-        for(int i = 0; i < points.size() - 1; i++) {
-            if(!points.get(i).isAdjacentTo(points.get(i + 1))) {
-                return false;
-            }
-        }
-        return true;
-    }
-    
-    private static <E> List<E> catList(List<E> list, E el) {
-        List<E> catList = new ArrayList<>(list);
-        catList.add(el);
-        return catList;
-    }
-    
+     * Disposable Iterator to iterate over the points in this Path.
+     * Does not allow modifications to the Path.
+     */ 
     private class PathIterator implements Iterator<ImmutablePoint> {
     private int cursor = 0;
     
@@ -289,5 +271,27 @@ public final class Path implements Iterable<ImmutablePoint> {
         throw new UnsupportedOperationException("May not remove points from path.");
     }
 }
+    
+    // Private Implementation Methods
+    private static boolean isValidPath(List<ImmutablePoint> points) {
+        // first ensure no null points
+        for(ImmutablePoint p : points) {
+            if(p == null) {
+                return false;
+            }
+        }
+        // then ensure all points are adjacent
+        for(int i = 0; i < points.size() - 1; i++) {
+            if(!points.get(i).isAdjacentTo(points.get(i + 1))) {
+                return false;
+            }
+        }
+        return true;
+    }
+    private static <E> List<E> catList(List<E> list, E el) {
+        List<E> catList = new ArrayList<>(list);
+        catList.add(el);
+        return catList;
+    }
     
 }
