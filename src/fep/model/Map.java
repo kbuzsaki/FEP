@@ -310,8 +310,7 @@ public class Map {
         if(position == null) {
             throw new IllegalArgumentException("Position must be non-null");
         }
-        if(    position.getX() >= getWidth() || position.getX() < 0
-            || position.getY() >= getHeight() || position.getY() < 0) {
+        if(!position.inBounds(0, 0, getWidth(), getHeight())) {
             throw new IllegalArgumentException("Position out of bounds: "
                     + "Position: " + position + ", Width: " + getWidth() 
                     + ", Height: " + getHeight());
