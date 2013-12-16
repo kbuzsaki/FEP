@@ -10,3 +10,5 @@ that was the result of my "learning as I went" in terms of design convinced me
 to start from scratch.
 
 This is FEP version 2.
+
+[The Google Drive folder for other FEP-related files can be found here.](https://drive.google.com/folderview?id=0B8tNmMS7FdszeGtxS1A3N2FHZ3c&usp=sharing)
