@@ -76,7 +76,7 @@ public enum MoveType implements MoveCostStrategy {
         setMapEntries(table, DESERT_BEHAVIOR, 4, KNIGHT_A, KNIGHT_B);
         setMapEntries(table, DESERT_BEHAVIOR, 1, MAGE);
         
-        // Forest, Pillar -- default 2 | knight 3 
+        // Forest -- default 2 | knight 3 
         setMapEntries(table, FOREST_BEHAVIOR, 2, moveTypes);
         setMapEntries(table, FOREST_BEHAVIOR, 3, KNIGHT_A, KNIGHT_B);
         

@@ -24,7 +24,7 @@ public interface TerrainBehavior {
      */
     public int getBonusAvoid();
     /**
-     * Returns his terrain's bonus defense.
+     * Returns this terrain's bonus defense.
      * @return  this terrain's bonus defense.
      */
     public int getBonusDefense();

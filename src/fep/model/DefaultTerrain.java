@@ -4,7 +4,7 @@
 package fep.model;
 
 /**
- *
+ * Enumerates the built-in Terrain types used and provided by FEP.
  * @author Kyle
  */
 public enum DefaultTerrain implements Terrain {
