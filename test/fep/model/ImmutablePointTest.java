@@ -13,7 +13,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author Kyle
+ * @author Kyle Buzsaki
  */
 public class ImmutablePointTest {
     

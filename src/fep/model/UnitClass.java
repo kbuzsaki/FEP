@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * Represents the class or profession of a unit in FEP.
- * @author Kyle
+ * @author Kyle Buzsaki
  */
 public interface UnitClass {
     

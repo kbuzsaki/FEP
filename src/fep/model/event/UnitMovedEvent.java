@@ -10,7 +10,7 @@ import java.util.EventObject;
 
 /**
  * Represents the moving of a unit on a map.
- * @author Kyle
+ * @author Kyle Buzsaki
  */
 public class UnitMovedEvent extends EventObject {
 

@@ -8,7 +8,7 @@ package fep.model;
  * should implement this interface so that they can be treated as such.
  * Examples of this include Horse, Armor, Flyer, and Dragon.
  * The default UnitTypes can be found in {@link fep.model.DefaultUnitType}.
- * @author Kyle
+ * @author Kyle Buzsaki
  */
 public interface UnitType {
 

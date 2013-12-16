@@ -6,7 +6,7 @@ package fep.model;
 /**
  * Represents a view of a single tile in the map. The tile will always view
  * the same location on the Map, though the map itself may be altered.
- * @author Kyle
+ * @author Kyle Buzsaki
  */
 public class Tile {
     

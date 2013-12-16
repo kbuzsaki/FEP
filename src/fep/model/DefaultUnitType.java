@@ -5,7 +5,7 @@ package fep.model;
 
 /**
  * An enumeration of the default {@link UnitType Unit Types} of FEP.
- * @author Kyle
+ * @author Kyle Buzsaki
  */
 public enum DefaultUnitType implements UnitType {
     /**

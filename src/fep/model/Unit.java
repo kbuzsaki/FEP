@@ -5,7 +5,7 @@ package fep.model;
 
 /**
  * Represents a unit in FEP.
- * @author Kyle
+ * @author Kyle Buzsaki
  */
 public class Unit {
     

@@ -5,7 +5,7 @@ package fep.model;
 
 /**
  * Represents a direction in the 2D grid.
- * @author Kyle
+ * @author Kyle Buzsaki
  */
 public enum Direction {
     UP,

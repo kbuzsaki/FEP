@@ -18,7 +18,7 @@ import javax.swing.event.EventListenerList;
  * contained within the map is guaranteed to have a non-null piece of terrain.
  * Squares may or may not contain units. Units are guaranteed to only appear
  * once in the map.
- * @author Kyle
+ * @author Kyle Buzsaki
  */
 public class Map {
     

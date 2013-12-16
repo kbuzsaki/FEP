@@ -16,7 +16,7 @@ import java.util.List;
 
 /**
  *
- * @author Kyle
+ * @author Kyle Buzsaki
  */
 public class Cursor {
     // NOTE: possibly extract some interface? "CommandHandler" or "CommandStrategy"

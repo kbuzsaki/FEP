@@ -14,7 +14,7 @@ package fep.model;
  * to determine the cost of moving through the Terrain.
  * Instances of TerrainBehavior are expected to be unique instances, typically
  * expressed as enumerations.
- * @author Kyle
+ * @author Kyle Buzsaki
  */
 public interface TerrainBehavior {
     

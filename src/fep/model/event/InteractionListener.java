@@ -5,7 +5,7 @@ package fep.model.event;
 
 /**
  *
- * @author Kyle
+ * @author Kyle Buzsaki
  */
 public interface InteractionListener {
 

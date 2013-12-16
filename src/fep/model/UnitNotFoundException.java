@@ -6,7 +6,7 @@ package fep.model;
 /**
  * Represents a failure to find the specified unit, typically because the unit
  * is not present in the given data structure (e.g. a {@link fep.model.Map})
- * @author Kyle
+ * @author Kyle Buzsaki
  */
 public class UnitNotFoundException extends IllegalStateException {
     

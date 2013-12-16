@@ -15,7 +15,7 @@ import java.util.NoSuchElementException;
  * Each point in the path is guaranteed to be adjacent to the points preceding
  * and following it in the path, as specified by ImmutablePoint.isAdjacentTo().
  * This class is immutable.
- * @author Kyle
+ * @author Kyle Buzsaki
  */
 public final class Path implements Iterable<ImmutablePoint> { 
     private static final Path EMPTY_PATH = new Path(Collections.<ImmutablePoint>emptyList());

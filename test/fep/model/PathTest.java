@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
 
 /**
  * Tests the Game.Path class.
- * @author Kyle
+ * @author Kyle Buzsaki
  */
 public class PathTest {
     

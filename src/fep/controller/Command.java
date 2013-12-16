@@ -7,7 +7,7 @@ import fep.model.Direction;
 
 /**
  * A single command representing a button press from a GameBoy Advance.
- * @author Kyle
+ * @author Kyle Buzsaki
  */
 public enum Command {
     UP("Up"),

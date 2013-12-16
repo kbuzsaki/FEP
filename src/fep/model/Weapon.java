@@ -5,7 +5,7 @@ package fep.model;
 
 /**
  * Represents a weapon item in FEP.
- * @author Kyle
+ * @author Kyle Buzsaki
  */
 public class Weapon {
     // private constructor to prevent initialization until properly created

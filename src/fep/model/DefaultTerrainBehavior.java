@@ -7,7 +7,7 @@ package fep.model;
  * Enumerates the built-in TerrainBehavior instances used and provided by FEP.
  * These are based on and synthesized from the information found at
  * <a href="http://serenesforest.net/fe7/terrain.html">Serenes Forest</a>
- * @author Kyle
+ * @author Kyle Buzsaki
  */
 public enum DefaultTerrainBehavior implements TerrainBehavior {
 

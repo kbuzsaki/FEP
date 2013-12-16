@@ -8,7 +8,7 @@ import javax.swing.JFrame;
 
 /**
  *
- * @author Kyle
+ * @author Kyle Buzsaki
  */
 public class GameWindow extends JFrame {
     

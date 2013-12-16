@@ -10,7 +10,7 @@ import java.util.EventObject;
 
 /**
  *
- * @author Kyle
+ * @author Kyle Buzsaki
  */
 public class TerrainChangedEvent extends EventObject {
 

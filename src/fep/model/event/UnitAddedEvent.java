@@ -9,7 +9,7 @@ import java.util.EventObject;
 
 /**
  * Represents the addition of a unit to a map.
- * @author Kyle
+ * @author Kyle Buzsaki
  */
 public class UnitAddedEvent extends EventObject {
     

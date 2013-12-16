@@ -6,7 +6,7 @@ package fep.model;
 /**
  * Represents a square of terrain on a map. Links the name of a specific terrain
  * piece with its gameplay behavior, as defined by {@link fep.model.TerrainBehavior}.
- * @author Kyle
+ * @author Kyle Buzsaki
  */
 public interface Terrain {
     

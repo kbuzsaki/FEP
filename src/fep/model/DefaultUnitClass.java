@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
  * An enumeration of the default {@link UnitClass Unit Classes} in FEP. 
- * @author Kyle
+ * @author Kyle Buzsaki
  */
 public enum DefaultUnitClass implements UnitClass {
     

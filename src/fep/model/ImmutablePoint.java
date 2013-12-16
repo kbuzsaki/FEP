@@ -12,7 +12,7 @@ import java.util.Set;
 /**
  * Represents an integer point in 2 dimensional space. This point is immutable.
  * This class's purpose is to provide an immutable alternative to {@link Point}.
- * @author Kyle
+ * @author Kyle Buzsaki
  */
 public final class ImmutablePoint {
     

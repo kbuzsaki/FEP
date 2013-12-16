@@ -13,7 +13,7 @@ import java.util.HashMap;
 
 /**
  *
- * @author Kyle
+ * @author Kyle Buzsaki
  */
 public enum MoveType implements MoveCostStrategy {
 

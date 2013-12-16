@@ -7,7 +7,7 @@ import java.util.EventListener;
 
 /**
  *
- * @author Kyle
+ * @author Kyle Buzsaki
  */
 public interface MapChangeListener extends EventListener {
     

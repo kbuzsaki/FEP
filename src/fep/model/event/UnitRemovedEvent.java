@@ -10,7 +10,7 @@ import java.util.EventObject;
 
 /**
  * Represents the removal of a unit from a map.
- * @author Kyle
+ * @author Kyle Buzsaki
  */
 public class UnitRemovedEvent extends EventObject {
     

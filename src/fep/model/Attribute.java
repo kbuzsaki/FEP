@@ -5,7 +5,7 @@ package fep.model;
 
 /**
  * Represents an attribute in a unit's stats. It 
- * @author Kyle
+ * @author Kyle Buzsaki
  */
 public class Attribute {
     
