@@ -5,14 +5,15 @@ package fep.model;
 
 import java.util.List;
 import static fep.model.DefaultTerrainBehavior.*;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 
 /**
- *
+ * Enumerates the types of unit movement in FEP. Each unit movement type is a
+ * MoveCostStrategy that determines the cost of moving over terrain for a unit
+ * with the given movement type.
  * @author Kyle Buzsaki
  */
 public enum MoveType implements MoveCostStrategy {
