@@ -5,7 +5,9 @@ package fep.model;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * An enumeration of the default {@link UnitClass Unit Classes} in FEP. 
@@ -13,25 +15,38 @@ import java.util.List;
  */
 public enum DefaultUnitClass implements UnitClass {
     
-    MERCENARY(Collections.<DefaultUnitType>emptyList(), MoveType.FOOT),
-    WYVERN_KNIGHT(Arrays.asList(DefaultUnitType.FLYER, DefaultUnitType.DRAGON), MoveType.FLYER);
+    MERCENARY("Mercenary", Collections.<UnitType>emptyList(), MoveType.FOOT),
+    WYVERN_KNIGHT("Wyvern Knight", Arrays.<UnitType>asList(DefaultUnitType.FLYER, DefaultUnitType.DRAGON), MoveType.FLYER);
     
-    private final List<DefaultUnitType> types;
+    private final String name;
+    private final Set<UnitType> types;
     private final MoveCostStrategy moveCostStrategy;
     
-    DefaultUnitClass(List<DefaultUnitType> types, MoveCostStrategy moveCostStrategy) {
-        this.types = types;
+    DefaultUnitClass(String name, List<UnitType> types, MoveCostStrategy moveCostStrategy) {
+        this.name = name;
+        this.types = Collections.unmodifiableSet(new HashSet<>(types));
         this.moveCostStrategy = moveCostStrategy;
     }
     
     @Override
-    public List<DefaultUnitType> getUnitTypes() {
+    public String getName() {
+        return name;
+    }
+    
+    @Override
+    public Set<UnitType> getUnitTypes() {
         return types;
     }
     
     @Override
     public MoveCostStrategy getMoveCostStrategy() {
         return moveCostStrategy;
+    }
+    
+    // JAVA8: should be default method in UnitClass
+    @Override
+    public String toString() {
+        return getName();
     }
     
 }
